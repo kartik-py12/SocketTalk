@@ -16,7 +16,6 @@ const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
 
-const PORT=process.env.PORT;
 
 app.use(express.json());
 app.use(cookieParser());
