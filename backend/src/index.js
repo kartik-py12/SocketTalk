@@ -12,12 +12,14 @@ import messageRoutes from "./routes/message.route.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
+console.log("Environment:", process.env.NODE_ENV);
+console.log("Port:", PORT);
 
 
-app.use(express.json());
+
 app.use(cookieParser());
 // Increase JSON body size limit to 10MB
 app.use(express.json({ limit: '10mb' }));
@@ -31,11 +33,12 @@ app.use(cors({
 app.use("/api/auth",authRoutes);
 app.use("/api/message",messageRoutes);
 
-if(process.env.NODE_ENV==="production"){
-    app.use(express.static(path.join(__dirname,"../frontend/dist"))); 
+if(process.env.NODE_ENV === "production"){
+    const frontendDistPath = path.join(__dirname, "../frontend/dist");
+    app.use(express.static(frontendDistPath)); 
 
     app.get("*",(req,res) => {
-        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"));
+        res.sendFile(path.join(frontendDistPath, "index.html"));
     });
 }
 
