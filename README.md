@@ -366,7 +366,7 @@ This project is licensed under the ISC License.
 
 ## 👨‍💻 Author
 
-**Your Name** - [Your GitHub](https://github.com/yourusername)
+**Kartik Sharma** - [Your GitHub](https://github.com/kartik-py12)
 
 ## 🙏 Acknowledgments
 
