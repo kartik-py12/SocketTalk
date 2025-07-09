@@ -26,7 +26,9 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin: process.env.NODE_ENV === "production" 
+        ? ["https://sockettalk.vercel.app", "https://your-vercel-domain.vercel.app"] 
+        : "http://localhost:5173",
     credentials:true
 }))
 
