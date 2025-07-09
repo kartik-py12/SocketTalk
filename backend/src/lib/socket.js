@@ -7,7 +7,23 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:["http://localhost:5173"],
+        origin: function (origin, callback) {
+            const allowedOrigins = [
+                "http://localhost:5173",
+                "https://sockettalk.vercel.app"
+            ];
+            
+            // Allow requests with no origin (like mobile apps or curl requests)
+            if (!origin) return callback(null, true);
+            
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            } else {
+                console.log(`Socket.IO CORS blocked origin: ${origin}`);
+                return callback(new Error('Not allowed by CORS'));
+            }
+        },
+        credentials: true
     },
 });
 
